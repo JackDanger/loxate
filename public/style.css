@@ -1,3 +1,18 @@
+form.big {
+  font-size: 1.8em;
+}
+input.text, input.submit {
+  font-size: 1.2em;
+}
+body {
+  line-height: 1.8em;
+}
+
+/**************************************************************************
+Everything below here is the original theme (except for some sizes)
+**************************************************************************/
+
+
 /**************************************************************************
 Background colour, fonts, margins, all are done here
 **************************************************************************/

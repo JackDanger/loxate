@@ -1,11 +1,10 @@
 
-%p
-  %form{:action => '/', :method => 'POST'}
-    %div Enter your email address:
-    %div
-      %input{:name => "email"}
-    %div And your current location:
-    %div
-      %input{:name => "location"}
-  
-    %input{:type => 'submit', :value => 'Try it out!'}
+%form.big{:action => '/', :method => 'POST'}
+  %div Enter your email address:
+  %div
+    %input.text{:name => "email"}
+  %div And your current location:
+  %div
+    %input.text{:name => "location"}
+
+  %input.submit{:type => 'submit', :value => 'Try it out!'}
