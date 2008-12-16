@@ -10,7 +10,21 @@ body {
 #logo a {
   color: #FFF;
 }
-
+body #logo {
+  float: left;
+}
+h1.title {
+  float: left;
+  margin-left: 3em;
+}
+.clearer {
+  float: left;
+  clear: both;
+}
+#header {
+  width: 100%;
+  float: left;
+}
 /**************************************************************************
 Everything below here is the original theme (except for some sizes)
 **************************************************************************/

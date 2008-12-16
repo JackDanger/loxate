@@ -6,10 +6,11 @@
     %style{ :type => "text/css", :media => "screen" } @import url(/style.css);
   %body
     #thebox
-      #logo
-        %a{:href => '/'} LOXATE
+      #header
+        #logo
+          %a{:href => '/'} LOXATE
+        %h1.title WHERE YOU BE AT
       #content
-        %h1 WHERE YOU BE AT
         = yield
     %br/
     %br/
