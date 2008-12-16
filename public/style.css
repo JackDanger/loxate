@@ -36,6 +36,13 @@ h1.title {
   width: 100%;
   float: left;
 }
+.float_right {
+  float: right;
+}
+.small {
+  font-size: 0.7em;
+}
+
 /**************************************************************************
 Everything below here is the original theme (except for some sizes)
 **************************************************************************/

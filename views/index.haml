@@ -6,5 +6,12 @@
   %div And your current location:
   %div
     %input.text{:name => "location"}
+  %div
+    Email Token:
+    %small (if you're already in the system)
+  %div
+    %input.text{:name => "token"}
+    .float_right.small
+      %a{:onclick => "document.href='/request_reset/'+prompt(\"What's your email?\");"} Help! I forgot my token!
 
-  %input.submit{:type => 'submit', :value => 'Try it out!'}
+  %input.submit{:type => 'submit', :value => 'Ka-Pow!'}
