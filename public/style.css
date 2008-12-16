@@ -7,6 +7,9 @@ input.text, input.submit {
 body {
   line-height: 1.8em;
 }
+#logo a {
+  color: #FFF;
+}
 
 /**************************************************************************
 Everything below here is the original theme (except for some sizes)
