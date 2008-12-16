@@ -22,12 +22,12 @@ class Location < ActiveRecord::Base
 
       if !nickname.empty?
         # see if this address is really just a nickname
-        current_location = find(:first, :conditions => "LOWER(locations.nickname) = #{address.downcase}")
+        current_location = find(:first, :conditions => ["LOWER(locations.nickname) = ?", address.downcase])
         address     = current_location.address
         coordinates = current_location.coordinates
       elsif !address.empty?
         # see if this address has already been used
-        find(:first, :conditions => "LOWER(locations.address) = #{address.downcase}")
+        find(:first, :conditions => ["LOWER(locations.address) = ?", address.downcase])
       end
 
       # lookup coordinates unless they've been provided
@@ -64,7 +64,7 @@ class Location < ActiveRecord::Base
     end
 
     def geocoordinate(location)
-      csv = open("http://maps.google.com/maps/geo?q=#{location}&output=csv&sensor=false&key=#{GOOGLE_MAP_KEY}").read
+      csv = open("http://maps.google.com/maps/geo?q=#{URI.escape(location)}&output=csv&sensor=false&key=#{GOOGLE_MAP_KEY}").read
       status, accuracy, c1, c2 = csv.to_s.split(',')
       "#{c1},#{c2}"
     end
