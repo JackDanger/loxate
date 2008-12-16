@@ -13,6 +13,9 @@ class Email < ActiveRecord::Base
   validates_uniqueness_of   :name, :message => 'That email address is already being used'
   validates_format_of       :name, :message => 'Please enter a valid email address', :with => ADDRESS_FORMAT
 
+  has_many :locations, :include => :visits, :order => "visits.created_at DESC"
+  has_one  :location,  :include => :visits, :order => "visits.created_at DESC"
+
   before_create :update_tokens
 
   def locate!(address)
