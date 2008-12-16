@@ -19,7 +19,7 @@ class Email < ActiveRecord::Base
   before_create :update_tokens
 
   def locate!(address)
-    
+    locations.find_or_create_by_user_entered_location(address)
   end
 
   def reset!
