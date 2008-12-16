@@ -2,6 +2,7 @@ require 'rubygems'
 gem 'guid'
 require 'guid'
 require 'net/smtp'
+require File.join(File.dirname(__FILE__), 'smtp_tls')
 
 class Email < ActiveRecord::Base
 
@@ -33,7 +34,7 @@ class Email < ActiveRecord::Base
   end
 
   def send_reset_email
-  	Net::SMTP.start('smtp.gmail.com', 465, 'mail.loxate.com') do |smtp|
+  	Net::SMTP.start('smtp.gmail.com', 587, 'mail.loxate.com', ENV['EMAIL_USERNAME'], ENV['EMAIL_PASSWORD'], 'plain') do |smtp|
       message = <<-END_OF_MESSAGE
 From: Loxate.com <email@loxate.com>
 To: #{name} <#{name}>
@@ -49,7 +50,7 @@ http://loxate.com/reset/#{name}/#{reset_token}
 Feel free to reply to this message.
 
 END_OF_MESSAGE
-  		smtp.send_message message, 'email@loxate.com', name, ENV['email_username'], ENV['email_password']
+  		smtp.send_message message, 'email@loxate.com', name
   	end
   end
 
