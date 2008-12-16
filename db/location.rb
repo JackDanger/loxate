@@ -32,7 +32,7 @@ class Location < ActiveRecord::Base
       coordinates = location.=~(/^\s*-?\d+\.\d+,-?\d+\.\d+\s*$/) ?
         location : geocoordinate(location)
 
-      nickname, address, coordinates
+      [nickname, address, coordinates]
     end
 
     def geocoordinate(location)
