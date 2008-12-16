@@ -4,11 +4,18 @@
     %strong= @email.location.address
   .row
     %small= "(#{@email.location.coordinates})"
+  - unless @email.location.nickname.empty?
+    .row
+      Note: this location has been saved as
+      = '"'+ @email.location.nickname.to_s + '"'
+      %br
+      You can reuse this location just by entering
+      = '"'+ @email.location.nickname.to_s + '"'
+      into the location box next time.
   .row
-    %p Tell your friends, your iPhone, your websites, and your future children where you are:
-  .row
-    %strong
-      %a{:href => "http://loxate.com/#{@email.name}"}= @email.name
+    %p
+      Tell your friends, your iPhone, your websites, and your future children where you are:
+      %a{:href => "/#{@email.name}"}= @email.name
   
   .row
     For your reference, your email token is:
