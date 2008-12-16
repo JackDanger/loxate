@@ -6,4 +6,9 @@ class Location < ActiveRecord::Base
 
   has_many :visits
 
+
+  def visited!
+    visits.create
+  end
+
 end
