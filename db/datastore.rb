@@ -22,7 +22,7 @@ unless File.exist?(File.join(root, "data.sqlite"))
 
     create_table :locations do |table|
       table.column :email_id, :integer
-      table.column :nick, :string
+      table.column :nickname, :string
       table.column :address, :string
       table.column :coordinates, :string
       table.column :created_at, :datetime
