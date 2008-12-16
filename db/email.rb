@@ -1,5 +1,7 @@
+require 'rubygems'
 gem 'guid'
 require 'guid'
+require 'net/smtp'
 
 class Email < ActiveRecord::Base
 
@@ -16,4 +18,26 @@ class Email < ActiveRecord::Base
     self.token       = Guid.new.to_s.split('-').first
     save
   end
+
+  def send_reset_email
+  	Net::SMTP.start('smtp.gmail.com', 465, 'mail.loxate.com') do |smtp|
+      message = <<-END_OF_MESSAGE
+From: Loxate.com <email@loxate.com>
+To: #{name} <#{name}>
+Subject: Resetting your Loxate.com access token
+
+Hey there, sorry to hear that you're having trouble using the site.
+
+Click this link to get a new "token" that makes sure you're you when
+you use loxate.com:
+
+http://loxate.com/reset/#{name}/#{reset_token}
+
+Feel free to reply to this message.
+
+END_OF_MESSAGE
+  		smtp.send_message message, 'email@loxate.com', name, ENV['email_username'], ENV['email_password']
+  	end
+  end
+
 end
