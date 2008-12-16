@@ -10,6 +10,10 @@ form.big input.text {
 form.big input.text, form.big input.submit {
   font-size: 1.2em;
 }
+.row {
+  margin-bottom: 0.5em;
+}
+
 
 body {
   line-height: 1.8em;
