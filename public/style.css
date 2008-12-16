@@ -3,7 +3,7 @@ Background colour, fonts, margins, all are done here
 **************************************************************************/
 body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 11px;
+	font-size: 15px;
 	background-color: #FFFFFF;
 }
 
@@ -28,7 +28,7 @@ a:hover {
 This is the giant white box that holds everything together
 **************************************************************************/
 #thebox {
-	width: 50em;
+	width: 600px;
 	background-color: white;
 	color: #666;
 	border: 1px #cccccc solid;
@@ -50,7 +50,7 @@ there are better ways of doing this. Please drop me a line if you know how.
 	color: #FFFFFF;
 	font-family: Helvetica, sans-serif;
 	font-weight: normal;
-	font-size: 11px;
+	font-size: 1em;
 	letter-spacing: 5px;
 	text-transform: uppercase;
 }
@@ -67,7 +67,6 @@ are used.
 	color: #999;
 	font-family: 'Gill Sans', Verdana, Helvetica, sans-serif;
 	font-weight: normal;
-	font-size: 11px;
 }
 
 #nav li {
@@ -77,7 +76,7 @@ are used.
 }
 
 #nav a {
-	font-size: 10px;
+	font-size: 1em;
 	font-weight: bold;
 	color: #999;
 	text-decoration: none;
@@ -103,7 +102,7 @@ Header #1 - This header displays the topic name of text
 **************************************************************************/
 #content h1 {
 
-font-size: 12px;
+  font-size: 1.5em;
 
 }
 
@@ -125,7 +124,7 @@ Header #2 - This header displays the date
 **************************************************************************/
 
 #content h2 { 
-font-size: 10px;
+font-size: 1.35em;
 letter-spacing: 3px;
 text-transform: uppercase;
 }
