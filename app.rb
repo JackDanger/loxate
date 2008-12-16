@@ -3,12 +3,15 @@ require 'vendor/sinatra/lib/sinatra'
 require 'db/load'
 
 before do
-  @email = Email.find_or_create_by_name(params[:email]) if params[:email]
+  if params[:email]
+    @email = Email.find_by_name(params[:email])
+    @email_exists = true if @email
+    @email ||= Email.create(:name => params[:email])
+  end
 end
 
 get '/' do
   haml :index, :layout => :default
-  # introduction and forms for creating/updating
 end
 
 get '/:email' do
@@ -16,8 +19,23 @@ get '/:email' do
 end
 
 post '/' do
-  # save the location if the email is now
-  # otherwise display error and ask for token
+  if !@email
+    # handle missing email
+    erb :missing_email, :layout => :default
+  elsif @email_exists && params[:token].to_s =~ /^\s*$/
+    # handle missing token
+    haml :missing_token, :layout => :default
+  elsif @email.token =~ params[:token]
+    # handle incorrect token
+    haml :incorrect_token, :layout => :default
+  elsif params[:location].to_s =~ /^\s*$/
+    # handle missing location
+    haml :missing_location, :layout => :default
+  else
+    # things worked out correctly
+    @email.locate!(params[:location])
+    haml :updated, :layout => :default
+  end
 end
 
 put '/' do
