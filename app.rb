@@ -10,6 +10,28 @@ before do
   end
 end
 
+helpers do
+  def update_email
+    if !@email
+      # handle missing email
+      erb :missing_email, :layout => :default
+    elsif @email_exists && params[:token].to_s =~ /^\s*$/
+      # handle missing token
+      haml :missing_token, :layout => :default
+    elsif @email.token =~ params[:token]
+      # handle incorrect token
+      haml :incorrect_token, :layout => :default
+    elsif params[:location].to_s =~ /^\s*$/
+      # handle missing location
+      haml :missing_location, :layout => :default
+    else
+      # things worked out correctly
+      @email.locate!(params[:location])
+      haml :updated, :layout => :default
+    end
+  end
+end
+
 get '/' do
   haml :index, :layout => :default
 end
@@ -18,27 +40,13 @@ get '/:email' do
   # find and display location
 end
 
+# posting and putting will trigger the same update operaion
 post '/' do
-  if !@email
-    # handle missing email
-    erb :missing_email, :layout => :default
-  elsif @email_exists && params[:token].to_s =~ /^\s*$/
-    # handle missing token
-    haml :missing_token, :layout => :default
-  elsif @email.token =~ params[:token]
-    # handle incorrect token
-    haml :incorrect_token, :layout => :default
-  elsif params[:location].to_s =~ /^\s*$/
-    # handle missing location
-    haml :missing_location, :layout => :default
-  else
-    # things worked out correctly
-    @email.locate!(params[:location])
-    haml :updated, :layout => :default
-  end
+  update_email
 end
 
 put '/' do
+  update_email
 end
 
 get '/request_reset/:email' do
@@ -49,3 +57,6 @@ get '/reset/:email/:reset_token' do
   # reset the token for this email address
 end
 
+not_found do
+  haml :index, :layout => :default
+end
