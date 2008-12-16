@@ -1,8 +1,8 @@
 require 'rubygems'
-require 'sinatra'
+require 'vendor/sinatra/lib/sinatra'
 
 get '/' do
-  haml :index
+  haml :index, :layout => :default
   # introduction and forms for creating/updating
 end
 
@@ -10,12 +10,12 @@ get '/:email' do
   # find and display location
 end
 
-post '/:email/:location' do
+post '/' do
   # save the location if the email is now
   # otherwise display error and ask for token
 end
 
-put '/:email/:token/:location' do
+put '/' do
   # update the location if the token is valid
 end
 
