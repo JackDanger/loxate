@@ -1,9 +1,16 @@
 form.big {
   font-size: 1.8em;
 }
-input.text, input.submit {
+form.big input {
+  margin: 3px 0;
+}
+form.big input.text {
+  width: 590px;
+}
+form.big input.text, form.big input.submit {
   font-size: 1.2em;
 }
+
 body {
   line-height: 1.8em;
 }
@@ -11,7 +18,11 @@ body {
   color: #FFF;
 }
 body #logo {
+  margin-left: 0;
   float: left;
+}
+body #content {
+  padding: 0 0 0 0;
 }
 h1.title {
   float: left;
