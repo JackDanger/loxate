@@ -2,15 +2,20 @@ require 'rubygems'
 require 'vendor/sinatra/lib/sinatra'
 require 'db/load'
 
-before do
-  if params[:email]
-    @email = Email.find_by_name(params[:email])
-    @email_exists = true if @email
-    @email ||= Email.create(:name => params[:email])
-  end
-end
 
 helpers do
+
+  def find_email
+  email = params[:email]
+  email ||= params[:splat].first if params[:splat] && params[:splat].first =~ /.+@.+/
+  
+  if email
+    @email = Email.find_by_name(email)
+    @email_exists = true if @email
+    @email ||= Email.create(:name => email)
+  end
+  end
+
   def update_email
     if !@email
       # handle missing email
@@ -18,7 +23,7 @@ helpers do
     elsif @email_exists && params[:token].to_s =~ /^\s*$/
       # handle missing token
       haml :missing_token, :layout => :default
-    elsif @email.token =~ params[:token]
+    elsif @email.token == params[:token]
       # handle incorrect token
       haml :incorrect_token, :layout => :default
     elsif params[:location].to_s =~ /^\s*$/
@@ -33,28 +38,39 @@ helpers do
 end
 
 get '/' do
+  find_email
   haml :index, :layout => :default
-end
-
-get '/:email' do
-  # find and display location
 end
 
 # posting and putting will trigger the same update operaion
 post '/' do
+  find_email
   update_email
 end
 
 put '/' do
+  find_email
   update_email
 end
 
-get '/request_reset/:email' do
+get '/request_reset/*' do
+  find_email
   # send an email to allow resetting this email's token
+  @email.send_reset_email
 end
 
 get '/reset/:email/:reset_token' do
+  find_email
   # reset the token for this email address
+end
+
+get '/*' do
+  find_email
+  if @email.location
+    @email.location.coordinates
+  else
+    stop [404, "That email is not tracked at Loxate"]
+  end
 end
 
 not_found do
