@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'vendor/sinatra/lib/sinatra'
-require 'datastore'
+require 'db/load'
 
 get '/' do
   haml :index, :layout => :default
