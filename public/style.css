@@ -1,7 +1,7 @@
-form.big {
+.big {
   font-size: 1.8em;
 }
-form.big input {
+.big input, div, p {
   margin: 3px 0;
 }
 form.big input.text {

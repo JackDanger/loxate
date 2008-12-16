@@ -1,0 +1,10 @@
+.big
+  .row
+    %strong= @email.location.address
+  .row There you are!
+  .row= "(#{@email.location.coordinates})"
+  .row Tell your friends, your iPhone, your websites, and your future children where you are:
+  .row
+    %strong
+      %a{:href => "http://loxate.com/#{@email.name}"}= @email.name
+  
