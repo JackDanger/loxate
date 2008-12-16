@@ -6,14 +6,14 @@ require 'db/load'
 helpers do
 
   def find_email
-  email = params[:email]
-  email ||= params[:splat].first if params[:splat] && params[:splat].first =~ /.+@.+/
+    email = params[:email]
+    email ||= params[:splat].first if params[:splat] && params[:splat].first =~ /.+@.+/
   
-  if email
-    @email = Email.find_by_name(email)
-    @email_exists = true if @email
-    @email ||= Email.create(:name => email)
-  end
+    if email
+      @email = Email.find_by_name(email)
+      @email_exists = true if @email
+      @email ||= Email.create(:name => email)
+    end
   end
 
   def update_email
@@ -23,7 +23,7 @@ helpers do
     elsif @email_exists && params[:token].to_s =~ /^\s*$/
       # handle missing token
       haml :missing_token, :layout => :default
-    elsif @email.token == params[:token]
+    elsif @email.token != params[:token]
       # handle incorrect token
       haml :incorrect_token, :layout => :default
     elsif params[:location].to_s =~ /^\s*$/
@@ -57,11 +57,16 @@ get '/request_reset/*' do
   find_email
   # send an email to allow resetting this email's token
   @email.send_reset_email
+  haml :email_sent, :layout => :default
 end
 
-get '/reset/:email/:reset_token' do
+get '/reset/*/*' do
   find_email
-  # reset the token for this email address
+  if @email.reset_token == params[:splat].last
+    haml :show_token, :layout => :default
+  else
+    erb "<h2>Whoops!</h2>That was a bad link.  If you go to the <a href='/'>home page</a> you can get a fresh link by asking for a token reset."
+  end
 end
 
 get '/*' do
