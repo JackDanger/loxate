@@ -1,0 +1,12 @@
+.big
+  %h3 Here is your email token:
+  .row
+    %strong= @email.token
+    = # TODO: implement javascript auto-saving of this token via cookies
+  %br
+  .row
+    %p Use it whenever you update your location from this website or with an computer or phone application
+  %br
+  .row
+    %strong
+      %a{:href => "/"} Back to Home
