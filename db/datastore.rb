@@ -2,7 +2,7 @@ require 'rubygems'
 require 'active_record'
 
 root = File.expand_path(File.dirname(__FILE__))
-dbfile = File.join(root, "data.#{ENV['environment']}.sqlite")
+dbfile = File.join(root, "data.#{ENV['RACK_ENV']}.sqlite")
 
 ActiveRecord::Base.logger = Logger.new(STDERR) if ENV['LOG']
 ActiveRecord::Base.colorize_logging = false
