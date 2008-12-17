@@ -21,12 +21,12 @@ class EmailTest < Test::Unit::TestCase
       @email.locate!("best town, USA")
     end
     
-    before_should "save a location record" do
-      Location.any_instance.expects(:create).once
+    before_should "start with no locations" do
+      assert @email.locations.blank?
     end
     
     should "save just one location record" do
-      assert_equal 1, Location.count
+      assert_equal 1, @email.locations.count
     end
     
     should "set it's own location record" do
