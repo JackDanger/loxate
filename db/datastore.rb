@@ -1,18 +1,19 @@
 require 'rubygems'
 require 'active_record'
 
-ENV['environment'] ||= 'production'
-
 root = File.expand_path(File.dirname(__FILE__))
+ENV['environment'] ||= 'production'
+dbfile = File.join(root, "data.#{ENV['environment']}.sqlite")
+
 ActiveRecord::Base.logger = Logger.new(STDERR)
 ActiveRecord::Base.colorize_logging = false
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
-  :dbfile  => File.join(root, "data.#{ENV['environment']}.sqlite")
+  :dbfile  => dbfile
 )
 
-unless File.exist?(File.join(root, "data.sqlite"))
+unless File.exist?(dbfile)
   ActiveRecord::Schema.define do
     create_table :emails do |table|
       table.column :name, :string
