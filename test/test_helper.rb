@@ -7,7 +7,7 @@ require 'shoulda'
 require 'shoulda/active_record'
 require 'mocha'
 
-ENV['environment'] = 'test'
+ENV['RACK_ENV'] = 'test'
 
 root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
@@ -17,7 +17,7 @@ File.delete(testdb) if File.exists?(testdb)
 # require the sinatra app
 require File.join(root, 'app')
 
-Location.stubs(:geocoordinate).returns("0,0")
+Location.stubs(:geocoordinate).returns("-0,-0")
 
 module Test
   module Unit
