@@ -9,9 +9,10 @@
     #thebox
       #header
         #logo
-          %a{:href => '/'}
-            = surround "lo", "ate" do
-              %span.chi &#967;
+          %a{:href => '/', :title => "Loxate Home"}
+            / = surround "lo", "ate" do
+            /   %span.chi &#967
+            %img{:src => "/loxate.png", :alt => "Loxate Home"}/
         %h1.title WHERE YOU BE AT
       #content
         = yield

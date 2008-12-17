@@ -1,5 +1,5 @@
 .chi {
-  font-family: helvetica;
+  font-family: Times New Roman;
 }
 .big {
   font-size: 1.8em;
@@ -16,7 +16,9 @@ form.big input.text, form.big input.submit {
 .row {
   margin-bottom: 0.5em;
 }
-
+a img {
+  border: 0;
+}
 
 body {
   line-height: 1.8em;
@@ -26,7 +28,10 @@ body {
 }
 body #logo {
   margin-left: 0;
+  padding-top: 35px;
+	width: 180px;
   float: left;
+  font-family: Helvetica;
 	text-transform: capitalize;
 	font-size: 1.7em;
 }
@@ -35,7 +40,7 @@ body #content {
 }
 h1.title {
   float: left;
-  margin-left: 3em;
+  margin-left: 1em;
 }
 .clearer {
   float: left;
