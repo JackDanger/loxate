@@ -79,6 +79,9 @@ class ApplicationTest < Test::Unit::TestCase
 
       should_eventually "display proper errors" do
       end
+
+      should_eventually "autofill with passed data" do
+      end
     end
   end
 
