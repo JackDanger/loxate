@@ -68,7 +68,6 @@ class Location < ActiveRecord::Base
     end
 
     def geocoordinate(location)
-      return '' if 'test' == ENV['environment']
       csv = open("http://maps.google.com/maps/geo?q=#{URI.escape(location)}&output=csv&sensor=false&key=#{GOOGLE_MAP_KEY}").read
       status, accuracy, c1, c2 = csv.to_s.split(',')
       "#{c1},#{c2}"

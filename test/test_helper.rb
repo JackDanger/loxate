@@ -17,6 +17,8 @@ File.delete(testdb) if File.exists?(testdb)
 # require the sinatra app
 require File.join(root, 'app')
 
+Location.stubs(:geocoordinate).returns("0,0")
+
 module Test
   module Unit
     class TestCase
