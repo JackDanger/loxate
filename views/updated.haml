@@ -5,7 +5,7 @@
     %strong= @email.location.address
   .row
     %small= "(#{@email.location.coordinates})"
-  - unless @email.location.nickname.empty?
+  - unless @email.location.nickname.blank?
     .row
       Note: this location has been saved as
       = '"'+ @email.location.nickname.to_s + '"'

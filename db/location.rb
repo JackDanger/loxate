@@ -52,19 +52,21 @@ class Location < ActiveRecord::Base
     end
 
     def parse(location)
-      nickname, address, coordinates = '', location.to_s, ''
+      nickname, address, coordinates = nil, location, nil
 
-      return '', '', '' if address =~ /^\s*$/
+      return nil, nil, nil if address.blank?
 
       # if there is a nickname entered to name this address then extract it
       if address =~ /(.*)\[(.*)\]$/
         address, nickname = address.scan(/(.*)\[(.*)\]$/).flatten
+        address.strip!
+        nickname.strip!
       end
 
       # if the user has passed us some coordinates then accept them as given
       coordinates = address if address =~ /^\s*-?\d+\.\d+,-?\d+\.\d+\s*$/
 
-      [nickname.strip, address.strip, coordinates.strip]
+      [nickname, address, coordinates]
     end
 
     def geocoordinate(location)

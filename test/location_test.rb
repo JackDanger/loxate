@@ -17,8 +17,8 @@ class LocationTest < Test::Unit::TestCase
       assert Array === Location.parse('')
     end
 
-    should "return three blank strings if given nothing" do
-      assert_equal ['', '', ''], Location.parse('')
+    should "return array of nils if given nothing" do
+      assert_equal [nil, nil, nil], Location.parse('')
     end
 
     should "extract nicknames" do
@@ -72,7 +72,7 @@ class LocationTest < Test::Unit::TestCase
     end
 
     should "have empty nickname if none was given" do
-      assert_equal '', Location.find_or_create_by_user_entered_location("some address").nickname
+      assert_nil Location.find_or_create_by_user_entered_location("some address").nickname
     end
 
     should "save nickname if provided" do
