@@ -12,7 +12,7 @@ helpers do
     email = params[:email]
     email ||= params[:splat].first if params[:splat] && params[:splat].first =~ /.+@.+/
   
-    if email
+    unless email.blank?
       @email = Email.find_or_create_by_name(email)
       # give 'em just a few minutes to play
       @token_required = true if @email.created_at < (Time.new - 60*30)
@@ -23,7 +23,7 @@ helpers do
   def update_email
     if !@email
       # handle missing email
-      erb :missing_email, :layout => :default
+      haml :index, :layout => :default
     elsif @token_required && params[:token].blank?
       # handle missing token
       haml :missing_token, :layout => :default
@@ -32,7 +32,7 @@ helpers do
       haml :incorrect_token, :layout => :default
     elsif params[:location].blank?
       # handle missing location
-      haml :missing_location, :layout => :default
+      haml :index, :layout => :default
     elsif @email.locate!(params[:location])
       # things worked out correctly
       haml :updated, :layout => :default
