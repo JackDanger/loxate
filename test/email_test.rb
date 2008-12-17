@@ -3,7 +3,6 @@ require File.join(File.dirname(__FILE__), 'test_helper')
 class EmailTest < Test::Unit::TestCase
 
   def setup
-    Location.stubs(:geocoordinate).returns("7.12312,-12.98123144")
     @email = Email.create(:name => "excellent@testworthy.com")
   end
 

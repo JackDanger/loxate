@@ -88,10 +88,10 @@ class LocationTest < Test::Unit::TestCase
   
   end
 
-  context "Location" do
+  context "Location when given invalid address" do
 
     setup do
-      Location.stubs(:geocordinate).returns("0,0")
+      Location.stubs(:geocoordinate).returns("0,0")
     end
     
     should "return double-zero coordinates because I just stubbed it" do

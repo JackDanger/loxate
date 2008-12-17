@@ -17,14 +17,17 @@ File.delete(testdb) if File.exists?(testdb)
 # require the sinatra app
 require File.join(root, 'app')
 
-# bypass the network entirely.  Gotta mock this if we want any decent results
-def Location.geocoordinate(location)
-  "0,0"
-end
-
 module Test
   module Unit
     class TestCase
+
+      setup :bypass_web_service
+
+      def bypass_web_service
+        # bypass the network entirely.  Gotta re-mock this if we want any decent results
+        Location.stubs(:geocoordinate).returns("7.12312,-12.98123144")
+      end
+
       # poor man's transactional fixture
       teardown :delete_everthing
 
