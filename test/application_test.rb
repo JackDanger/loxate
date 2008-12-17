@@ -28,15 +28,24 @@ class ApplicationTest < Test::Unit::TestCase
   context "submitting the home page" do
     
     setup do
-      post_it "/", "location" => "596 SW Awesome blvd, Seattle, WA", "email" => "me@myself.com"
+      @address = "596 SW Awesome blvd, Seattle, WA"
+      post_it "/", "location" => @address, "email" => "me@myself.com"
     end
 
     should "render the updated view" do
       assert @response.body =~ /<!-- updated.haml -->/, @response.body
     end
 
-    should "save the new location" do
-      assert @response.body =~ /<!-- updated.haml -->/, @response.body
+    should "save a location record" do
+      assert Location.first
+    end
+
+    should "save the new location to the email address" do
+      assert_equal Location.first, Email.first.location
+    end
+
+    should "save the new location with the right address" do
+      assert_equal @address, Email.first.location.address
     end
   end
 
