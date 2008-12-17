@@ -34,7 +34,7 @@ class ApplicationTest < Test::Unit::TestCase
     end
 
     before_should "hit the right layout" do
-      Sinatra::EventContext.any_instance.expects(:render).with(:haml, :updated, :layout => :application).once
+      Sinatra::EventContext.any_instance.expects(:render).with(:haml, :updated, :layout => :default).once
     end
 
     should "render the updated view" do
