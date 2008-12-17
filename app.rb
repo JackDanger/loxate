@@ -15,7 +15,7 @@ helpers do
     unless email.blank?
       @email = Email.find_or_create_by_name(email)
       # give 'em just a few minutes to play
-      @token_required = true if @email.created_at < (Time.new - 60*30)
+      @token_required = true if @email.created_at && @email.created_at < (Time.new - 60*30)
     end
     @email
   end

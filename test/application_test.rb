@@ -57,21 +57,28 @@ class ApplicationTest < Test::Unit::TestCase
     
     context "with invalid data" do
 
-      before_should "render home page if location is empty" do
+      should "render home page if location is empty" do
         Sinatra::EventContext.any_instance.expects(:render).with(:haml, :index, :layout => :default).once
         post_it '/', "location" => "90210", "email" => ""
       end
 
-      before_should "render home page if email is empty" do
+      should "render home page if email is empty" do
         Sinatra::EventContext.any_instance.expects(:render).with(:haml, :index, :layout => :default).once
         post_it '/', "location" => "", "email" => "fullemail@signup.com"
       end
 
-      before_should "render home page if location and email are empty" do
+      should "render home page if email is invalid" do
+        Sinatra::EventContext.any_instance.expects(:render).with(:haml, :index, :layout => :default).once
+        post_it '/', "location" => "", "email" => "fullemail@signup.com"
+      end
+
+      should "render home page if location and email are empty" do
         Sinatra::EventContext.any_instance.expects(:render).with(:haml, :index, :layout => :default).once
         post_it '/', "location" => "", "email" => ""
       end
 
+      should_eventually "display proper errors" do
+      end
     end
   end
 
