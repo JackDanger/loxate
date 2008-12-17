@@ -1,4 +1,5 @@
-require 'rubygems'
+require     'rubygems'
+require     'activesupport'
 require     File.join(File.dirname(__FILE__), 'vendor/sinatra/lib/sinatra')
 require     File.join(File.dirname(__FILE__), 'vendor/sinatra/lib/sinatra/test/unit') if 'test' == ENV['environment']
 require     File.join(File.dirname(__FILE__), 'db/load')
@@ -12,9 +13,9 @@ helpers do
     email ||= params[:splat].first if params[:splat] && params[:splat].first =~ /.+@.+/
   
     if email
-      @email = Email.find_by_name(email)
-      @email_exists = true if @email
-      @email ||= Email.create(:name => email)
+      @email = Email.find_or_create_by_name(email)
+      # give 'em just a few minutes to play
+      @token_required = true if @email.created_at < (Time.new - 60*30)
     end
   end
 
@@ -22,10 +23,10 @@ helpers do
     if !@email
       # handle missing email
       erb :missing_email, :layout => :default
-    elsif @email_exists && params[:token].to_s =~ /^\s*$/
+    elsif @token_required && params[:token].blank?
       # handle missing token
       haml :missing_token, :layout => :default
-    elsif @email.token != params[:token]
+    elsif @token_required && @email.token != params[:token]
       # handle incorrect token
       haml :incorrect_token, :layout => :default
     elsif params[:location].to_s =~ /^\s*$/

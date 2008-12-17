@@ -19,7 +19,7 @@ class Location < ActiveRecord::Base
 
       nickname, address, coordinates = parse(location)
 
-      if !address.empty?
+      if !address.blank?
         # see if this address is really just a nickname
         if current_location = find(:first, :conditions => ["LOWER(locations.nickname) = ?", address.downcase])
           # use the existing address and coords saved previously
@@ -31,11 +31,11 @@ class Location < ActiveRecord::Base
       end
 
       # lookup coordinates unless they've been provided
-      coordinates = geocoordinate(address) if coordinates.empty?
+      coordinates = geocoordinate(address) if coordinates.blank?
 
       # if a save nickname has been provided to an existing location
       # then make sure the pieces get connected
-      if current_location && !nickname.empty?
+      if current_location && !nickname.blank?
         current_location.nickname    = nickname
         current_location.address     = address
         current_location.coordinates = coordinates
