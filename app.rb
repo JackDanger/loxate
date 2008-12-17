@@ -1,6 +1,6 @@
 require 'rubygems'
-require 'vendor/sinatra/lib/sinatra'
-require 'db/load'
+require File.join(File.dirname(__FILE__), 'vendor/sinatra/lib/sinatra')
+require File.join(File.dirname(__FILE__), 'db/load')
 
 
 helpers do
