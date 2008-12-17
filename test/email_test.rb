@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), 'test_helper')
 class EmailTest < Test::Unit::TestCase
 
   def setup
-    Email.create :name => "first@email.com"
+    @email = Email.create(:name => "excellent@testworthy.com")
   end
 
   should_have_many :locations
@@ -14,4 +14,28 @@ class EmailTest < Test::Unit::TestCase
   should_have_readonly_attributes  :name
   should_not_allow_values_for :name, 'what', 'empty@', 'domain.com', '@something.com', 'wow... what@email.com', :message => /Please enter your real email address/
   should_allow_values_for     :name, 'email@example.com', 'complex+name_code-list@uk.gov.att-company.co.au'
+
+  context "Email.locate!" do
+    
+    setup do
+      @email.locate!("best town, USA")
+    end
+    
+    before_should "save a location record" do
+      Location.any_instance.expects(:create).once
+    end
+    
+    should "save just one location record" do
+      assert_equal 1, Location.count
+    end
+    
+    should "set it's own location record" do
+      assert @email.location
+    end
+    
+    should "have the location available in two places" do
+      assert_equal @email.location, @email.locations.first
+    end
+  end
+
 end
