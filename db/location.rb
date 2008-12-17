@@ -7,6 +7,7 @@ class Location < ActiveRecord::Base
   GOOGLE_MAP_KEY = ENV['google_key'] || "ABQIAAAAfuwksR5DY21zFbPBhashcRSIOFcUe7xWTqvkPP1wySqBHxG2ZRTA5vp0mc_tHzEF3JboST57MQ_Ivg"
 
   validates_presence_of :coordinates
+  validates_exclusion_of :coordinates, :in => ["0,0"], :message => "Even Google couldn't figure out where that was"
 
   belongs_to :email
   has_many :visits

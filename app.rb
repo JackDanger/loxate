@@ -33,10 +33,11 @@ helpers do
     elsif params[:location].blank?
       # handle missing location
       haml :missing_location, :layout => :default
-    else
+    elsif @email.locate!(params[:location])
       # things worked out correctly
-      @email.locate!(params[:location])
       haml :updated, :layout => :default
+    else
+      haml :errors, :layout => :default
     end
   end
 end
