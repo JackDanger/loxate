@@ -29,7 +29,7 @@ helpers do
     elsif @token_required && @email.token != params[:token]
       # handle incorrect token
       haml :incorrect_token, :layout => :default
-    elsif params[:location].to_s =~ /^\s*$/
+    elsif params[:location].blank?
       # handle missing location
       haml :missing_location, :layout => :default
     else
