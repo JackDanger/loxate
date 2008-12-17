@@ -1,6 +1,7 @@
 require 'rubygems'
 
 require 'test/unit'
+require 'activesupport'
 require 'shoulda'
 require 'shoulda/active_record'
 require 'mocha'

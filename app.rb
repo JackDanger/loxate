@@ -4,6 +4,7 @@ require     File.join(File.dirname(__FILE__), 'vendor/sinatra/lib/sinatra/test/u
 require     File.join(File.dirname(__FILE__), 'db/load')
 set :views, File.join(File.dirname(__FILE__), 'views')
 
+
 helpers do
 
   def find_email
