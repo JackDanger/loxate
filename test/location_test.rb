@@ -37,4 +37,14 @@ class LocationTest < Test::Unit::TestCase
     end
   end
 
+
+  context "Finding existing records" do
+    should "find location when the address is a saved nickname" do
+      assert_equal Location.find_by_nickname('home'), Location.find_or_create_by_user_entered_location('home')
+    end
+
+    should "find location when the address has been used before" do
+      assert_equal Location.find_by_address('Beverly Hills, 90210'), Location.find_or_create_by_user_entered_location('Beverly Hills, 90210')
+    end
+  end
 end
