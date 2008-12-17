@@ -18,6 +18,7 @@ class EmailTest < Test::Unit::TestCase
   context "Email.locate!" do
     
     setup do
+      Location.stubs(:geocoordinate).returns("7.12312,-12.98123144")
       @email.locate!("best town, USA")
     end
     
