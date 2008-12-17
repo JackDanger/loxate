@@ -8,6 +8,7 @@ class Location < ActiveRecord::Base
 
   validates_presence_of :coordinates
 
+  belongs_to :email
   has_many :visits
 
   def visited!
