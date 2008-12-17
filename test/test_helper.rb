@@ -14,5 +14,3 @@ File.delete(testdb) if File.exists?(testdb)
 
 # require the sinatra app
 require File.join(root, 'app')
-# and the sinatra tests
-require File.join(root, 'vendor/sinatra/lib/sinatra/test/unit')

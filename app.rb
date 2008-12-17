@@ -1,7 +1,8 @@
 require 'rubygems'
-require File.join(File.dirname(__FILE__), 'vendor/sinatra/lib/sinatra')
-require File.join(File.dirname(__FILE__), 'db/load')
-
+require     File.join(File.dirname(__FILE__), 'vendor/sinatra/lib/sinatra')
+require     File.join(File.dirname(__FILE__), 'vendor/sinatra/lib/sinatra/test/unit') if 'test' == ENV['environment']
+require     File.join(File.dirname(__FILE__), 'db/load')
+set :views, File.join(File.dirname(__FILE__), 'views')
 
 helpers do
 
