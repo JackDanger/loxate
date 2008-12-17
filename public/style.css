@@ -1,6 +1,3 @@
-.chi {
-  font-family: Times New Roman;
-}
 .big {
   font-size: 1.8em;
 }
@@ -8,7 +5,7 @@
   margin: 3px 0;
 }
 form.big input.text {
-  width: 590px;
+  width: 550px;
 }
 form.big input.text, form.big input.submit {
   font-size: 1.2em;
@@ -19,36 +16,8 @@ form.big input.text, form.big input.submit {
 a img {
   border: 0;
 }
-
-body {
-  line-height: 1.8em;
-}
-#logo a {
-  color: #FFF;
-}
-body #logo {
-  margin-left: 0;
-  padding-top: 35px;
-	width: 180px;
-  float: left;
-  font-family: Helvetica;
-	text-transform: capitalize;
-	font-size: 1.7em;
-}
-body #content {
-  padding: 0 0 0 0;
-}
-h1.title {
-  float: left;
-  margin-left: 1em;
-}
-.clearer {
-  float: left;
-  clear: both;
-}
-#header {
-  width: 100%;
-  float: left;
+#content h1.title {
+  font-size: 2.4em;
 }
 .float_right {
   float: right;
@@ -56,6 +25,50 @@ h1.title {
 .small {
   font-size: 0.7em;
 }
+
+body {
+  line-height: 1.8em;
+}
+#logo a {
+  color: #FFF;
+}
+body #thebox {
+  width: 800px;
+  padding: 0px 10px;
+  margin-top: 10px;
+}
+body #header,
+body #logo,
+body #content {
+  float: left;
+}
+body #header {
+  width: 200px;
+  margin-right: 25px;
+}
+body #logo {
+  margin-left: 0;
+  padding-top: 300px;
+	width: 180px;
+  font-family: Helvetica;
+	text-transform: capitalize;
+	font-size: 1.7em;
+}
+body #content {
+  padding: 0 0 0 0;
+  width: 575px;
+}
+body #foot {
+  clear: both;
+}
+
+/* ripped from BluePrint */
+.clearfix:after, .container:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix, .container {display:inline-block;}
+* html .clearfix, * html .container {height:1%;}
+.clearfix, .container {display:block;}
+.clear {clear:both;}
+
 
 /**************************************************************************
 Everything below here is the original theme (except for some sizes)
