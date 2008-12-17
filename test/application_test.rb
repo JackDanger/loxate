@@ -29,11 +29,16 @@ class ApplicationTest < Test::Unit::TestCase
     
     setup do
       @address = "596 SW Awesome blvd, Seattle, WA"
-      post_it "/", "location" => @address, "email" => "me@myself.com"
+      @email   = "me@myself.com"
+      post_it "/", "location" => @address, "email" => @email
+    end
+
+    before_should "hit the right layout" do
+      Sinatra::EventContext.any_instance.expects(:render).with(:haml, :updated, :layout => :application).once
     end
 
     should "render the updated view" do
-      assert @response.body =~ /<!-- updated.haml -->/, @response.body
+      assert @response.body =~ /<!-- updated.haml -->/
     end
 
     should "save a location record" do
