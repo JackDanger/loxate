@@ -19,25 +19,25 @@ class Location < ActiveRecord::Base
 
       nickname, address, coordinates = parse(location)
 
-      if !nickname.empty?
+      if !address.empty?
         # see if this address is really just a nickname
         if current_location = find(:first, :conditions => ["LOWER(locations.nickname) = ?", address.downcase])
           # use the existing address and coords saved previously
           address     = current_location.address
           coordinates = current_location.coordinates
         end
-      elsif !address.empty?
         # see if this address has already been used
-        current_location = find(:first, :conditions => ["LOWER(locations.address) = ?", address.downcase])
+        current_location ||= find(:first, :conditions => ["LOWER(locations.address) = ?", address.downcase])
       end
 
       # lookup coordinates unless they've been provided
       coordinates = geocoordinate(address) if coordinates.empty?
 
-      # if a save nickname has been provided then make sure
-      # it doesn't stay stuck to its old address
+      # if a save nickname has been provided to an existing location
+      # then make sure the pieces get connected
       if current_location && !nickname.empty?
-        current_location.address = address
+        current_location.nickname    = nickname
+        current_location.address     = address
         current_location.coordinates = coordinates
       end
 
@@ -68,6 +68,7 @@ class Location < ActiveRecord::Base
     end
 
     def geocoordinate(location)
+      return '' if 'test' == ENV['environment']
       csv = open("http://maps.google.com/maps/geo?q=#{URI.escape(location)}&output=csv&sensor=false&key=#{GOOGLE_MAP_KEY}").read
       status, accuracy, c1, c2 = csv.to_s.split(',')
       "#{c1},#{c2}"
