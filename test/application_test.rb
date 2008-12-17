@@ -17,5 +17,10 @@ class ApplicationTest < Test::Unit::TestCase
       get_it '/'
       assert @response.body =~ /<input.*name='location'/, @response.body
     end
+
+    should "have a form pointing to /" do
+      get_it '/'
+      assert @response.body =~ /<form.*action='\/'/, @response.body
+    end
   end
 end
