@@ -17,6 +17,7 @@ helpers do
       # give 'em just a few minutes to play
       @token_required = true if @email.created_at < (Time.new - 60*30)
     end
+    @email
   end
 
   def update_email
@@ -57,27 +58,42 @@ put '/' do
 end
 
 get '/request_reset/*' do
-  find_email
   # send an email to allow resetting this email's token
-  @email.send_reset_email
+  find_email && @email.send_reset_email
   haml :email_sent, :layout => :default
 end
 
 get '/reset/*/*' do
-  find_email
-  if @email.reset_token == params[:splat].last
+  if find_email && @email.reset_token == params[:splat].last
     haml :show_token, :layout => :default
   else
     erb "<h2>Whoops!</h2>That was a bad link.  If you go to the <a href='/'>home page</a> you can get a fresh link by asking for a token reset."
   end
 end
 
-get '/*' do
-  find_email
-  if @email.location
+get '/*.js' do
+  # TODO json content-type
+  if find_email && location = @email.location
+    %W({"address": "#{location.address}", "latitude": "#{location.latitude}", "longitude": "#{location.longitude}"})
+  else
+    stop [404, %W({"status": 404, "message": "#{@email.name} is not tracked by Loxate"})]
+  end
+end
+
+get '/*.txt' do
+  # TODO find geo content-type (?) or use plain text
+  if find_email && @email.location
     @email.location.coordinates
   else
     stop [404, "That email is not tracked at Loxate"]
+  end
+end
+
+get '/*' do
+  if find_email && @email.location
+    haml :updated, :layout => :default
+  else
+    stop [404, [:haml, :missing_email, {:layout => :default}]]
   end
 end
 

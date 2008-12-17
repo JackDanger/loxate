@@ -13,6 +13,9 @@ class Location < ActiveRecord::Base
   
   after_save proc {|location| location.visits.create }
 
+  def latitude;  coordinates.split(',').first; end
+  def longitude; coordinates.split(',').last; end
+
   class << self
 
     def find_or_create_by_user_entered_location(location)
