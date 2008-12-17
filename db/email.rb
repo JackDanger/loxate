@@ -10,9 +10,11 @@ class Email < ActiveRecord::Base
 
   ADDRESS_FORMAT = /^[a-z0-9!#\$%&'\*\+\-\/=\?\^_`{}|~]+(\.[a-zA-Z0-9!#\$%&'\*\+\-\/=\?\^_`{}|~]+)*@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
 
-  validates_presence_of     :name, :message => "Please enter an email address"
+  validates_presence_of     :name, :message => "Please enter your email address"
   validates_uniqueness_of   :name, :message => 'That email address is already being used'
-  validates_format_of       :name, :message => 'Please enter a valid email address', :with => ADDRESS_FORMAT
+  validates_format_of       :name, :message => 'Please enter your real email address', :with => ADDRESS_FORMAT
+
+  attr_readonly :name
 
   has_many :locations, :include => :visits, :order => "visits.created_at DESC"
   has_one  :location,  :include => :visits, :order => "visits.created_at DESC"
