@@ -11,5 +11,5 @@ Rake::TestTask.new do |t|
 end
 
 task :deploy do
-  `ssh www@9suits.com "cd /www/loxate/; git pull; sudo god restart loxate"`
+  system 'ssh www@9suits.com "cd /www/loxate/; git pull; sudo god restart loxate"'
 end
