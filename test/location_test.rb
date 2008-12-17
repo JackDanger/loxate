@@ -5,6 +5,8 @@ class LocationTest < Test::Unit::TestCase
   should_have_many :visits
   should_belong_to :email
 
+  should_require_attributes :coordinates
+
   context "Parsing user entered data" do
 
     should "return 3 values" do
@@ -55,6 +57,7 @@ class LocationTest < Test::Unit::TestCase
   end
 
   context "creating new records" do
+
     setup do
       @coords = "37.4,-89.4"
       Location.stubs(:geocoordinate).returns(@coords)
