@@ -85,5 +85,26 @@ class LocationTest < Test::Unit::TestCase
       assert_equal 'some address', location.address
       assert_equal @coords,        location.coordinates
     end
+  
+  end
+
+  context "Location" do
+
+    setup do
+      Location.stubs(:geocordinate).returns("0,0")
+    end
+    
+    should "return double-zero coordinates because I just stubbed it" do
+      assert_equal '0,0', Location.geocoordinate("anything")
+    end
+
+    should "not save if the coordinates are blank" do
+      assert Location.find_or_create_by_user_entered_location("some address").new_record?
+    end
+
+    should "be invalid on coordinates if the coordinates are blank" do
+      assert Location.find_or_create_by_user_entered_location("some address").errors.on(:coordinates)
+    end
+
   end
 end
