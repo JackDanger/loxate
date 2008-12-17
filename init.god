@@ -1,5 +1,5 @@
 
-# jackcanty.com
+# loxate.com
 God.watch do |w|
   dir = File.expand_path(File.dirname(__FILE__)) 
   w.name = "loxate"
