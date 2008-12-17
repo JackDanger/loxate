@@ -2,6 +2,10 @@ require File.join(File.dirname(__FILE__), 'test_helper')
 
 class ApplicationTest < Test::Unit::TestCase
 
+  def setup
+    Location.stubs(:geocoordinate).returns("7.12312,-12.98123144")
+  end
+
   context "viewing the home page" do
     
     setup do
