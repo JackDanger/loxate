@@ -5,7 +5,7 @@ root = File.expand_path(File.dirname(__FILE__))
 ENV['environment'] ||= 'production'
 dbfile = File.join(root, "data.#{ENV['environment']}.sqlite")
 
-ActiveRecord::Base.logger = Logger.new(STDERR)
+# ActiveRecord::Base.logger = Logger.new(STDERR)
 ActiveRecord::Base.colorize_logging = false
 
 ActiveRecord::Base.establish_connection(
