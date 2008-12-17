@@ -2,13 +2,15 @@
 %html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
   %head
     %meta{ :content => "text/html; charset=iso-8859-1", "http-equiv" => "Content-Type" }/
-    %title Loxate
+    %title Lo&#967;ate
     %style{ :type => "text/css", :media => "screen" } @import url(/style.css);
   %body
     #thebox
       #header
         #logo
-          %a{:href => '/'} LOXATE
+          %a{:href => '/'}
+            = surround "lo", "ate" do
+              %span.chi &#967;
         %h1.title WHERE YOU BE AT
       #content
         = yield
@@ -18,7 +20,7 @@
       %a{ :href => "http://validator.w3.org/check?uri=referer", :target => "_blank" } Valid XHTML
       |
       %a{ :href => "http://jigsaw.w3.org/css-validator/check/referer", :target => "_blank" } Valid CSS
-      | Copyright ©
+      | Copyright Â©
       %a{:href => "http://6brand.com/"} Jack Danger Canty
       | Design by
       %a{ :href => "http://smallpark.org" } SmallPark

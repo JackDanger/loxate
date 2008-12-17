@@ -1,3 +1,6 @@
+.chi {
+  font-family: helvetica;
+}
 .big {
   font-size: 1.8em;
 }
@@ -24,6 +27,8 @@ body {
 body #logo {
   margin-left: 0;
   float: left;
+	text-transform: capitalize;
+	font-size: 1.7em;
 }
 body #content {
   padding: 0 0 0 0;
