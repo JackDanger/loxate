@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'active_record'
 
+ENV['RACK_ENV'] ||= 'production'
+
 root = File.expand_path(File.dirname(__FILE__))
 dbfile = File.join(root, "data.#{ENV['RACK_ENV']}.sqlite")
 
