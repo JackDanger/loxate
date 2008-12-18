@@ -77,10 +77,23 @@ class ApplicationTest < Test::Unit::TestCase
         post_it '/', "location" => "", "email" => ""
       end
 
-      should_eventually "display proper errors" do
+      should_eventually "display error for missing email" do
+      end
+
+      should_eventually "display error for missing location" do
       end
 
       should_eventually "autofill with passed data" do
+      end
+      
+      context "when token is required" do
+
+        should_eventually "display token field" do
+        end
+
+        should_eventually "display token explanation" do
+        end
+
       end
     end
   end
