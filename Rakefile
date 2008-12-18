@@ -11,5 +11,5 @@ Rake::TestTask.new do |t|
 end
 
 task :deploy do
-  system 'ssh www@9suits.com "cd /www/loxate/; git fetch origin master; git reset --hard origin/master; sudo god restart loxate"'
+  system 'ssh www@9suits.com "cd /www/loxate/; git fetch origin; git reset --hard origin/master; sudo god restart loxate"'
 end
