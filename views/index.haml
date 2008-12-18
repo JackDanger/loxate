@@ -2,9 +2,11 @@
 %form.big{:action => '/', :method => 'post'}
   %div Enter your email address:
   %div
+    .error= @email && @email.errors.on(:name)
     %input.text{:name => "email"}
   %div And your current location:
   %div
+    .error= @email && @email.location && @email.location.errors.on(:coordinates)
     %input.text{:name => "location"}
   %div.token{:style => @token_required || "display: none;"}
     Email Token:
