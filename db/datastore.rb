@@ -6,7 +6,7 @@ ENV['RACK_ENV'] ||= 'production'
 root = File.expand_path(File.dirname(__FILE__))
 dbfile = File.join(root, "data.#{ENV['RACK_ENV']}.sqlite")
 
-ActiveRecord::Base.logger = Logger.new(STDERR) if ENV['LOG']
+ActiveRecord::Base.logger = Logger.new(File.join(root, "log.#{ENV['RACK_ENV']}.log"))
 ActiveRecord::Base.colorize_logging = false
 
 ActiveRecord::Base.establish_connection(
