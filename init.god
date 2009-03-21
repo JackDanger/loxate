@@ -2,6 +2,7 @@
 # loxate.com
 God.watch do |w|
   dir = File.expand_path(File.dirname(__FILE__)) 
+  port = 7733
   w.name = "loxate"
   w.interval = 30.seconds
   w.pid_file = File.join(dir, "rack.#{port}.pid")
